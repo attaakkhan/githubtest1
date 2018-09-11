@@ -16,8 +16,30 @@ Give examples
 
 ### Installing
 #### 1. Install and configure Kafka servers on Debian/Ubuntu
+### Installing
+#### 1. Install and configure Kafka servers on Debian/Ubuntu
 
-A step by step series of examples that tell you how to get a development env running
+Kafka servers are distributed messeging  servers
+##### Install Java
+Update your system to the latest available version in the repository
+```
+$ sudo apt-get update
+```
+Apache Kafka requires java runtime envirment, install using apt-get
+```
+$ sudo apt-get install default-jre
+```
+Say what the step will be
+
+```
+Give the example
+```
+
+And repeat
+
+```
+until finished
+Kafka servers are distributed messaging servers and 
 
 Say what the step will be
 
