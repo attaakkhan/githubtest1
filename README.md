@@ -15,7 +15,7 @@ Give examples
 ```
 
 ### Installing
-##### 1)Install and configure Kafka servers(Linux)
+#### 1)Install and configure Kafka servers on Debian/Ubuntu
 
 A step by step series of examples that tell you how to get a development env running
 
