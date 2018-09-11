@@ -15,7 +15,7 @@ Give examples
 ```
 
 ### Installing
-#### 1)Install and configure Kafka servers on Debian/Ubuntu
+#### 1. Install and configure Kafka servers on Debian/Ubuntu
 
 A step by step series of examples that tell you how to get a development env running
 
@@ -30,7 +30,8 @@ And repeat
 ```
 until finished
 ```
-
+#### 2. Install and configure Kafka servers on Debian/Ubuntu
+#### 3. Install and configure Kafka servers on Debian/Ubuntu
 End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
