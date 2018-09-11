@@ -14,6 +14,64 @@ What things you need to install the software and how to install them
 Give examples
 ```
 
+
+
+### Installing
+#### 1. Install and configure Kafka servers on Debian/Ubuntu
+
+Kafka servers are distributed messeging  servers
+##### Step 1- Install Java 
+Update your system to the latest available version in the repository
+```
+$ sudo apt-get update
+```
+Apache Kafka requires java runtime environment, install using apt-get
+```
+$ sudo apt-get install default-jre
+```
+
+##### Step 2- Install Zookeeper
+Kafka servers depend on zookeeper to coordinate, and we will use Apache zookeeper, which is an open source service used to manage information among distributed servers. Install zookeeperd using apt-get
+```
+$  sudo apt-get install zookeeperd 
+```
+After installing it will run automatically listening on port 2181, to test it run:
+```
+$  telnet localhost 2181
+```
+At the prompt type 'ruok' and if it returns 'imok' then everything is working well.
+
+Optionally, to check the zookeeper status use the followin command
+```
+$ sudo systemctl status zookeeper
+```
+if zookeeper is not running , use the following commant to activate the zookeeper
+```
+$ sudo systemctl enable zookeeper
+```
+##### Step 2- Download and install Apache kafka
+Navigate to ~/Downloads/ directory to download Kafka binaries
+```
+$ cd ~/Downloads 
+```
+Download Kafka 2.0 using wget
+```
+$  wget http://www-us.apache.org/dist/kafka/2.0.0/kafka_2.11-2.0.0.tgz 
+```
+```
+$ cd ~/Downloads 
+```
+```
+$ cd ~/Downloads 
+```
+```
+$ cd ~/Downloads 
+```
+```
+$ cd ~/Downloads 
+```
+
+
 ### Installing
 #### 1. Install and configure Kafka servers on Debian/Ubuntu
 ### Installing
