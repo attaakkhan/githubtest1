@@ -1,4 +1,4 @@
-# Project Title
+# ETL--Extract, Trandorm, and Load
 
 One Paragraph of project description goes here
 
@@ -8,11 +8,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+You need Ubuntu or any unix based  machine to run this project
 
-```
-Give examples
-```
+
 ### Setting up the enviroment for ETL
 #### 1. Install and configure Kafka servers on Debian/Ubuntu
 
