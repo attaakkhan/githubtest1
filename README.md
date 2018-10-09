@@ -1,4 +1,4 @@
-# ETL--Extract, Trandorm, and Load
+# Socail networking site for IOT devices
 
 One Paragraph of project description goes here
 
@@ -11,187 +11,69 @@ These instructions will get you a copy of the project up and running on your loc
 You need Ubuntu or any unix based  machine to run this project
 
 
-### Setting up the enviroment for ETL
-#### 1. Install and configure Kafka servers on Debian/Ubuntu
+### Setting up the enviroment
+#### 1. Install and configure PostgreSQL on Debian/Ubuntu
 
-##### Step 1- Install Java 
 Update your system to the latest available version in the repository
 ```
 $  sudo apt-get update
 ```
-Apache Kafka requires java runtime environment, install it using apt-get
-```
-$ sudo apt-get install default-jre
-```
-
-##### Step 2- Install Zookeeper
-Kafka servers depend on zookeeper to coordinate, and we will use Apache zookeeper, which is an open source service used to manage information among distributed servers. Install zookeeper using apt-get
-```
-$  sudo apt-get install zookeeperd 
-```
-After installing, it will run automatically listening on port 2181, to test it run:
-```
-$  telnet localhost 2181
-```
-At the prompt type 'ruok' and if it returns 'imok' then everything is working well.
-
-Optionally, to check the zookeeper status use the following command
-```
-$ sudo systemctl status zookeeper
-```
-if zookeeper is not running, use the following command to activate the zookeeper
-```
-$ sudo systemctl enable zookeeper
-```
-
-##### Step 2- Download and install Apache kafka
-Navigate to ~/Downloads/ directory to download Kafka binaries
-```
-$ cd ~/Downloads 
-```
-Download Kafka 2.0 using wget
-```
-$  wget http://www-us.apache.org/dist/kafka/2.0.0/kafka_2.11-2.0.0.tgz 
-```
-Now create a directory Kafka in the /opt directory
-```
-$  sudo mkdir /opt/Kafka
-```
-Extract Kafka binaries to /opt/kafka directory
-```
-$ sudo tar xvzf kafka_2.11-2.0.0.tgz -C /opt/Kafka
-
-```
-To view, the kafka Path use the following command
-```
-$  ls /opt/Kafka 
-```
-To add Kafka path to the system path, open /etc/profile using nano
-```
-$ sudo nano /etc/profile
-```
-Add the following lines to the end of the file, and then press ctrl+o to save and then press ctrl+x to exit
-```
-export KAFKA_PATH="/opt/Kafka/kafka_2.11-2.0.0"
-export PATH="$PATH:${KAFKA_PATH}/bin"
-```
-Finally, reboot your system
-```
-$  sudo reboot
-```
-After the system starts, make a link to the Kafka server.properties file where configurations for the Kafka server  are stored
-```
-$ sudo -i ln -s $KAFKA_PATH/config/server.properties /etc/kafka.properties
- ```
-Finally to run kafka server run the following command
-```
-$  sudo -i kafka-server-start.sh /etc/kafka.properties
-```
-
-##### Step 3- Testing Apache kafka using Terminal
-To test Apache kafka, open a new terminal tab and create a test topic using the following command
-```
-$  sudo -i kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1   --topic testTopic --partitions 1
-```
-Now to publish messages, use the follwing command. After running the command an arrow(>) will appear
-```
-$  sudo -i kafka-console-producer.sh --broker-list localhost:9092 --topic testTopic
-```
-To Consume messages, Open a new terminal tab and  use the following command
-```
-$  sudo -i kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic testTopic --from-beginning
-```
-Now type 'Hello' on the producer Terminal tab and you will also be able to see it on the consumer terminal tab.
-
-#### 2. Install and configure PostgreSQL on Debian/Ubuntu
  Install PostgreSQL using apt-get
 ```
 $  sudo apt-get install postgresql postgresql-contrib
 ```
-Creat user for etl
+Creat user
 ```
 $  sudo -u postgres createuser --interactive --pwprompt
 ```
 ```
 Output:
-Enter name of role to add: etluser
-Enter password for new role: 
-Enter it again: 
+Enter name of role to add: dspot
+Enter password for new role:dspot 
+Enter it again: dspot
 Shall the new role be a superuser? (y/n) y
 ```
-Create Database under etl user
+Create Database under dspot user
 
 ```
-$  sudo -u postgres createdb -O etluser etldb
+$  sudo -u postgres createdb -O dspot dspot_db
 
 
 ```
-Add the same user to your Unix system
+#### 2. Install and Django on Debian/Ubuntu
+
+Install django using pip
 ```
-$  sudo adduser etluser
+$ sudo pip install django
 ```
-Login to etldb using user etluser
+Install django module for postgresql
 ```
-$   sudo -u etluser psql etldb
+$  pip install psycopg2
 ```
-A prompt(etldb=#) will appear, create the following tables
-```
- CREATE TABLE Activity (
-    equip_id serial PRIMARY KEY,
-    type varchar (50) ,
-    name varchar (50) ,
-    role varchar (50) ,
-    time TIMESTAMP ,
-    id INT );
-```
-```
-CREATE TABLE login (
-    equip_id serial PRIMARY KEY,
-    name varchar (50) ,
-    role varchar (50) ,
-    time TIMESTAMP ,
-    id INT,
-    age INT
-    );
-```
-To check the schemas, use the following command at the prompt
-```
- \dt
-```
-```
-Output:
-           List of relations
- Schema |   Name   | Type  |  Owner  
---------+----------+-------+---------
- public | activity | table | etluser
- public | login    | table | etluser
-(2 rows)
-```
-#### 2. Install Maven, to bulid a copy of your own
-Open a new terminal and run:
-```
-$ sudo apt-get install maven
-```
+
 
 ## Building and Running
+### 1. Building and Running--Tha main django server
 
 To clone this project use git
 ```
-$  git clone https://github.com/attaakkhan/ETL.git
+$  git clone https://github.com/attaakkhan/Dspot-FYP-2016.git
 
 ```
-To build Producer with maven navigate to Producer.
+Navigate to dspot directory.
 ```
-$  cd ETL/Producer/
+$ cd Dspot-FYP-2016/Dspot/Dspot
 ```
-Now build the project with maven
+Now migrate the changes to Postresql
 ```
-$ mvn package
+$ python manage.py migrate
 ```
-Run the producer jar to genrate and send log to kafka servers
+Run The Server
 ```
-$ java -jar target/Producer.jar
+$ python manage.py runserver
 ```
+Now the server is running open http://127.0.0.1:8000/register/ in your Web Browser you will see the site
+
 Following is the sample of log generated and sent to kafka servers
 ```
 Logs:`
